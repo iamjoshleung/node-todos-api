@@ -10,6 +10,8 @@ const {Todo} = require('./models/todo')
 const {User} = require('./models/user')
 const {authenticate} = require('./middlewares/auth')
 
+const bcrypt = require('bcryptjs')
+
 let port = process.env.PORT || 3000
 
 let app = express()
@@ -113,6 +115,19 @@ app.post('/users', (req, res) => {
 
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user)
+})
+
+app.post('/users/login', (req, res) => {
+  let body = _.pick(req.body, ['email', 'password'])
+
+  User.findByCredentials(body.email, body.password).then((user) => {
+    return user.generateAuthToken().then((token) => {
+      res.header('x-auth', token).send({user})
+    })
+  }).catch((e) => {
+    res.status(400).send()
+  })
+
 })
 
 app.listen(port, () => {
