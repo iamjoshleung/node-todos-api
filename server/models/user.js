@@ -101,6 +101,16 @@ userSchema.statics.findByCredentials = function (email, password) {
   })
 }
 
+userSchema.methods.removeToken = function (token) {
+  let user = this
+
+  return user.update({
+    $pull: {
+      tokens: { token }
+    }
+  })
+}
+
 let User = mongoose.model('Users', userSchema)
 
 module.exports = {User}
