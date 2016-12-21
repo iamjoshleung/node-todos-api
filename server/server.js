@@ -12,7 +12,7 @@ const {authenticate} = require('./middlewares/auth')
 
 const bcrypt = require('bcryptjs')
 
-let port = process.env.PORT || 3000
+let port = process.env.PORT
 
 let app = express()
 

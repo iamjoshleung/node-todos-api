@@ -1,0 +1,12 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/Todos",
+    "JWT_SECRET": "gers32523fsg2352fs"
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/TodosTest",
+    "JWT_SECRET": "gesrg345345v2352fs"
+  }
+}
